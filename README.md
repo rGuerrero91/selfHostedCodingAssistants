@@ -109,7 +109,7 @@ Open WebUI will be available at `http://YOUR_MAC_IP:3000` from any device on you
 
 - Install the **Continue** extension from the VS Code marketplace
 - Open `~/.continue/config.yaml`
-- Replace its contents with the config below, substituting your own IP Address
+- Replace its contents with the config below, substituting LAN IP Address for the machine running Ollama (if it's running on the same machine you can use the internal home IP)
 
 ```yaml
 name: Local Config
