@@ -13,7 +13,7 @@ start:
 
 stop:
 	@launchctl bootout gui/$(shell id -u) ~/Library/LaunchAgents/com.ollama.plist 2>/dev/null || true
-	@docker compose down
+	@docker compose stop
 
 restart: stop start
 
