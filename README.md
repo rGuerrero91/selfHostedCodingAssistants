@@ -84,8 +84,14 @@ make setup
 
 This will install Ollama, configure it as a persistent network service, pull all three models, and start Open WebUI in Docker. **This will take a while depending on your connection.**
 
+---
 #### If Make isn't available, run the provisioning scripts manually:
+
+Install Ollama and pull model weights:
+```bash
 chmod +x setup.sh && ./setup.sh
+```
+
 Install Docker Desktop:
 ```bash
 brew install --cask docker
