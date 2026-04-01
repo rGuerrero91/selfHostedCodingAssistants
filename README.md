@@ -109,7 +109,7 @@ Open WebUI will be available at `http://YOUR_MAC_IP:3000` from any device on you
 
 - Install the **Continue** extension from the VS Code marketplace
 - Open `~/.continue/config.yaml`
-- Replace its contents with the config below, substituting your Mac's IP
+- Replace its contents with the config below, substituting your own IP Address
 
 ```yaml
 name: Local Config
@@ -119,7 +119,7 @@ models:
   - name: Coding Assistant (32B)
     provider: ollama
     model: qwen2.5-coder:32b
-    apiBase: http://YOUR_MAC_IP:11434
+    apiBase: http://YOUR_IP:11434
     roles:
       - chat
       - edit
@@ -128,7 +128,7 @@ models:
   - name: Architecture (70B)
     provider: ollama
     model: llama3.3:70b-instruct-q3_K_M
-    apiBase: http://YOUR_MAC_IP:11434
+    apiBase: http://YOUR_IP:11434
     roles:
       - chat
       - edit
@@ -137,7 +137,7 @@ models:
   - name: Autocomplete (7B)
     provider: ollama
     model: qwen2.5-coder:7b
-    apiBase: http://YOUR_MAC_IP:11434
+    apiBase: http://YOUR_IP:11434
     roles:
       - autocomplete
 
@@ -149,11 +149,6 @@ models:
 ```
 
 > `config.ts` is also present in the Continue directory — leave it at its default passthrough state and do not edit it. `config.yaml` is the active configuration file.
-
-Find your Mac's IP:
-```bash
-ipconfig getifaddr en0
-```
 
 ---
 
