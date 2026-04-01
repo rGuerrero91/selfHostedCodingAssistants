@@ -29,9 +29,9 @@ cat <<EOF > ~/Library/LaunchAgents/com.ollama.plist
     <key>KeepAlive</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>$(eval echo ~$USER)/ollama.log</string>
+    <string>$(eval echo ~$USER)/documents/coding-assistant-logs/ollama.log</string>
     <key>StandardErrorPath</key>
-    <string>$(eval echo ~$USER)/ollama.err</string>
+    <string>$(eval echo ~$USER)/documents/coding-assistant-logs/ollama.err</string>
 </dict>
 </plist>
 EOF
