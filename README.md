@@ -15,7 +15,7 @@ A self-hosted AI coding assistant running on Apple Silicon, accessible across yo
 | Coding Assistant | `qwen2.5-coder:32b` | 32B |
 | Architecture/Planning | `llama3.3:70b-instruct-q3_K_M` | 70B |
 
-**Note:** The Planning model's weight is currently too large for a 48GB M5 Pro, I'm in the process of finding a good Quantization/Weight Pruning/Context Window reduction tradeoff strategy.
+**Note:** The Planning model's weight is currently too large for a 48GB M5 Pro, I'm in the process of finding a good Quantization/Weight-Pruning/Context-reduction tradeoff strategy.
 
 ### Software Layer
 | Tool | Where | Purpose |
