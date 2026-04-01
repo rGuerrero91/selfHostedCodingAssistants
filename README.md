@@ -176,6 +176,12 @@ Switch between models using the dropdown at the top of the Continue sidebar.
 ### Browser
 Navigate to `http://YOUR_IP:3000` from any device on your network.
 
+### Headless
+If you only need Ollama running for the IDE Assistants and don't want to serve a frontend:
+```bash
+ollama serve
+```
+
 ---
 
 ## Maintenance
