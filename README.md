@@ -45,6 +45,7 @@ Designing/planning → llama3.3:70b        (sidebar)
 coding-assistant/
 ├── README.md
 ├── setup.sh
+├── uninstall.sh
 └── docker-compose.yml
 ```
 
@@ -79,7 +80,7 @@ ollama list
 curl http://YOUR_MAC_IP:11434
 ```
 
-Logs are written to `~/ollama.log` and `~/ollama.err` for debugging.
+Logs are written to `~/documents/coding-assistant-logs/ollama.log` and `~/documents/coding-assistant-logs/ollama.err` for debugging.
 
 To restart the service manually:
 ```bash
@@ -167,6 +168,28 @@ Switch between models using the dropdown at the top of the Continue sidebar.
 
 ### Browser
 Navigate to `http://YOUR_MAC_IP:3000` from any device on your network.
+
+---
+
+## Maintenance
+
+### Remove a single model
+```bash
+ollama rm llama3.3:70b
+```
+
+### List installed models
+```bash
+ollama list
+```
+
+### Full uninstall
+To remove Ollama, all models, and the service entirely:
+```bash
+chmod +x uninstall.sh && ./uninstall.sh
+```
+
+This will stop the service, uninstall Ollama via Homebrew, and delete all model data and logs.
 
 ---
 
