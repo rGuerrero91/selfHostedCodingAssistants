@@ -4,12 +4,12 @@ setup:
 	@echo "→ Running Ollama setup..."
 	@chmod +x setup.sh && ./setup.sh
 	@echo "→ Starting Docker services..."
-	@docker compose up -d
+	@docker compose build
 	@echo "→ Done. System is ready."
 
 start:
 	@launchctl bootstrap gui/$(shell id -u) ~/Library/LaunchAgents/com.ollama.plist 2>/dev/null || true
-	@docker compose up -d
+	@docker compose start
 
 stop:
 	@launchctl bootout gui/$(shell id -u) ~/Library/LaunchAgents/com.ollama.plist 2>/dev/null || true
