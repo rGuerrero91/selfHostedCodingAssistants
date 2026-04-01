@@ -61,7 +61,14 @@ Install Homebrew:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Disable sleep:
+install Docker Desktop for Mac:
+```bash
+brew install --cask docker
+```
+or:
+https://docs.docker.com/desktop/setup/install/mac-install/
+
+Disable sleep (optional):
 ```bash
 sudo systemsetup -setcomputersleep Never
 ```
@@ -74,6 +81,21 @@ make setup
 ```
 
 This will install Ollama, configure it as a persistent network service, pull all three models, and start Open WebUI in Docker. **This will take a while depending on your connection.**
+
+#### If Make isn't available, run the provisioning scripts manually:
+chmod +x setup.sh && ./setup.sh
+Install Docker Desktop:
+```bash
+brew install --cask docker
+```
+
+Start Open WebUI:
+```bash
+docker compose up -d
+```
+
+Open WebUI will be available at `http://YOUR_MAC_IP:3000` from any device on your network.
+
 
 ### 3. Continue.dev (VS Code)
 
