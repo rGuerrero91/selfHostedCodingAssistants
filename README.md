@@ -102,7 +102,7 @@ Start Open WebUI:
 docker compose up -d
 ```
 
-Open WebUI will be available at `http://YOUR_MAC_IP:3000` from any device on your network.
+Open WebUI will be available at `http://YOUR_IP:3000` from any device on your network.
 
 
 ### 3. Continue.dev (VS Code)
@@ -174,7 +174,7 @@ models:
 Switch between models using the dropdown at the top of the Continue sidebar.
 
 ### Browser
-Navigate to `http://YOUR_MAC_IP:3000` from any device on your network.
+Navigate to `http://YOUR_IP:3000` from any device on your network.
 
 ---
 
@@ -203,7 +203,7 @@ This will stop the service, uninstall Ollama via Homebrew, and delete all model 
 ## Verification Checklist
 ```bash
 # Ollama is reachable on the network
-curl http://YOUR_MAC_IP:11434
+curl http://YOUR_IP:11434
 
 # Models are loaded
 ollama list
