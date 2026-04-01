@@ -13,7 +13,7 @@ A self-hosted AI coding assistant running on Apple Silicon, accessible across yo
 |------|-------|------|
 | Autocomplete | `qwen2.5-coder:7b` | 7B |
 | Coding Assistant | `qwen2.5-coder:32b` | 32B |
-| Architecture/Planning | `llama3.3:70b` (quantized) | 70B |
+| Architecture/Planning | `llama3.3:70b-instruct-q3_K_M` | 70B |
 
 ### Software Layer
 | Tool | Where | Purpose |
@@ -26,24 +26,25 @@ A self-hosted AI coding assistant running on Apple Silicon, accessible across yo
 ### Storage
 ```
 ~/.ollama/models/
-├── qwen2.5-coder:7b      (~5GB)
-├── qwen2.5-coder:32b     (~20GB)
-└── llama3.3:70b-q4       (~40GB)
+├── qwen2.5-coder:7b              (~5GB)
+├── qwen2.5-coder:32b             (~20GB)
+└── llama3.3:70b-instruct-q3_K_M  (~34GB)
 
-Total: ~65GB of 1TB
+Total: ~59GB of 1TB
 ```
 
 ### Workflow
 ```
-Typing code        → qwen2.5-coder:7b    (automatic)
-Writing/fixing     → qwen2.5-coder:32b   (sidebar)
-Designing/planning → llama3.3:70b        (sidebar)
+Typing code        → qwen2.5-coder:7b              (automatic)
+Writing/fixing     → qwen2.5-coder:32b             (sidebar)
+Designing/planning → llama3.3:70b-instruct-q3_K_M  (sidebar)
 ```
 
 ### Repo Structure
 ```
 coding-assistant/
 ├── README.md
+├── Makefile
 ├── setup.sh
 ├── uninstall.sh
 └── docker-compose.yml
@@ -65,49 +66,16 @@ Disable sleep:
 sudo systemsetup -setcomputersleep Never
 ```
 
-### 2. Ollama + Models
+### 2. Provision Everything
 
-Run the provisioning script:
+From the repo root, run:
 ```bash
-chmod +x setup.sh && ./setup.sh
+make setup
 ```
 
-This will install Ollama, configure it as a persistent network service via a LaunchAgent, and pull all three models. **This will take a while depending on your connection.**
+This will install Ollama, configure it as a persistent network service, pull all three models, and start Open WebUI in Docker. **This will take a while depending on your connection.**
 
-Verify:
-```bash
-ollama list
-curl http://YOUR_MAC_IP:11434
-```
-
-Logs are written to `~/documents/coding-assistant-logs/ollama.log` and `~/documents/coding-assistant-logs/ollama.err` for debugging.
-
-To restart the service manually:
-```bash
-launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.ollama.plist
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.ollama.plist
-```
-
-### 3. Docker + Open WebUI
-
-Install Docker Desktop:
-```bash
-brew install --cask docker
-```
-
-Start Open WebUI:
-```bash
-docker compose up -d
-```
-
-Open WebUI will be available at `http://YOUR_MAC_IP:3000` from any device on your network.
-
-Find your Mac's IP:
-```bash
-ipconfig getifaddr en0
-```
-
-### 4. Continue.dev (VS Code)
+### 3. Continue.dev (VS Code)
 
 - Install the **Continue** extension from the VS Code marketplace
 - Open `~/.continue/config.yaml`
@@ -129,7 +97,7 @@ models:
 
   - name: Architecture (70B)
     provider: ollama
-    model: llama3.3:70b
+    model: llama3.3:70b-instruct-q3_K_M
     apiBase: http://YOUR_MAC_IP:11434
     roles:
       - chat
@@ -152,9 +120,23 @@ models:
 
 > `config.ts` is also present in the Continue directory — leave it at its default passthrough state and do not edit it. `config.yaml` is the active configuration file.
 
+Find your Mac's IP:
+```bash
+ipconfig getifaddr en0
+```
+
 ---
 
 ## Usage
+
+### Make Commands
+| Command | Action |
+|---------|--------|
+| `make setup` | First time provisioning — installs Ollama, pulls models, starts Docker |
+| `make start` | Start Ollama service and Docker containers |
+| `make stop` | Stop Ollama service and Docker containers |
+| `make restart` | Bounce everything |
+| `make logs` | Tail Ollama and Docker logs |
 
 ### VS Code
 | Action | Shortcut |
@@ -175,7 +157,7 @@ Navigate to `http://YOUR_MAC_IP:3000` from any device on your network.
 
 ### Remove a single model
 ```bash
-ollama rm llama3.3:70b
+ollama rm llama3.3:70b-instruct-q3_K_M
 ```
 
 ### List installed models
@@ -203,4 +185,12 @@ ollama list
 
 # Open WebUI is running
 docker compose ps
+```
+
+Logs are written to `~/ollama.log` and `~/ollama.err` for debugging.
+
+To restart the Ollama service manually:
+```bash
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.ollama.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.ollama.plist
 ```
