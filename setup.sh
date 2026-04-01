@@ -42,6 +42,6 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.ollama.plist
 echo "→ Pulling models (this will take a while)..."
 ollama pull qwen2.5-coder:7b
 ollama pull qwen2.5-coder:32b
-ollama pull llama3.3:70b
+ollama pull llama3.3:70b-instruct-q3_K_M
 
 echo "→ Done. Ollama is running and will start on boot."
